@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<body>
+<h1>All Users</h1>
+
+
+<th:block th:each="msg : ${listUser}">
+    <table>
+        <td><a th:href="@{/edit/{id}(id=${msg.getId()})}">Edit</a></td>
+        <td><a th:href="@{/remove/{id}(id=${msg.getId()})}">Delete</a></td>
+        <tr>
+            <h4></h4>
+            <td>ID</td>
+            <th th:text="${msg.getId()}"></th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <th th:text="${msg.getName()}">Name</th>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <th th:text="${msg.getAge()}">Age</th>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <th th:text="${msg.getRoles()}">Role</th>
+        </tr>
+    </table>
+</th:block>
+<br/>
+<br/>
+
+
+<h3>Create user</h3>
+
+<form action="#" th:action="@{/user/add}" th:object="${user}"
+      method="post">
+    <div class="row">
+        <div class="form-group col-md-8">
+            <label for="id" class="col-form-label">Name</label>
+            <input type="text" th:field="*{name}" class="form-control"
+                   id="name" placeholder="Name"/>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="id" class="col-form-label">Age</label>
+            <input type="text" th:field="*{age}" class="form-control"
+                   id="age" placeholder="Age"/>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="id" class="col-form-label">Password</label>
+            <input type="text" th:field="*{password}" class="form-control"
+                   id="password" placeholder="Password"/>
+        </div>
+        <div class="form-group col-md-8">
+            <tr>
+                <div class="col-md-12">
+                    <h5 class="text-center">
+                        Role
+                    </h5>
+                </div>
+                <td>
+                    <select class="form-control" name="role" multiple size="2">
+                        <option>ADMIN</option>
+                        <option>USER</option>
+                    </select>
+                </td>
+            </tr>
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-primary" value="Save">
+        </div>
+        <input type="hidden" id="id" th:field="*{id}">
+    </div>
+</form>
+<form th:action="@{/logout}">
+    <input type="submit" value="logout">
+</form>
+</body>
+</html>
